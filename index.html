@@ -36,6 +36,7 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
       -webkit-box-decoration-break: clone;
+      margin: 0;
       font-size: 4rem;
     }
 
@@ -58,8 +59,8 @@
     }
 
     form {
-      background-color: #31383a;
-      border-radius: 0.25rem;
+      background-color: #31383a33;
+      border-radius: 1rem;
       width: 400px;
       height: 200px;
       display: flex;
@@ -69,7 +70,8 @@
       gap: 2rem;
       padding: 4rem;
       position: relative;
-      border: 1px dashed var(--color-secondary);
+      border: 3px dashed var(--color-secondary);
+      margin-top: 4rem;
       margin-bottom: 2rem;
     }
 
@@ -82,12 +84,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    form button {
-      position: absolute;
-      bottom: 1rem;
-      z-index: 2;
     }
 
     button {
@@ -116,6 +112,9 @@
       display: flex;
       flex-direction: row;
       justify-content: center;
+      width: 100%;
+      position: relative;
+      z-index: 2;
     }
 
     .button-row button {
@@ -131,6 +130,7 @@
 
 <body>
   <h1>Convert kubernetes yaml to json</h1>
+  <p>Convert your yaml files to json and use it from pulumi or slask-action</p>
   <form method="post" action="convert" enctype="multipart/form-data" novalidate class="box">
     <label for="file">
       <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -144,12 +144,12 @@
       <span> or drag it here</span>
       <input type="file" name="files" id="file" multiple hidden />
     </label>
-    <button class="fill" type="submit">Upload</button>
+
   </form>
   <div class="button-row">
-    <button>Pure JSON</button>
-    <button>Pulumi</button>
-    <button>Slask</button>
+    <button type="submit" name="type" value="pure">Pure JSON</button>
+    <button type="submit" name="type" value="pulumi">Pulumi</button>
+    <button type="submit" name="type" value="slask">Slask</button>
   </div>
   <script></script>
 </body>
