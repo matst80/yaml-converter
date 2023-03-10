@@ -31,4 +31,4 @@ jobs:
         uses: matst80/slask-action@test
         with:
           k8sConfig: ${{ secrets.K8S_CONFIG }}
-          scriptPath: '../deploy.js'
+          scriptPath: '${GITHUB_WORKSPACE}/deploy.js'
