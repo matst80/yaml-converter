@@ -26,10 +26,7 @@ module.exports = async (k8s, { sha }) => {
           containers: [
             {
               name: "converter",
-              image: `registry.knatofs.se/yaml-converter:${sha.substring(
-                0,
-                7
-              )}`,
+              image: `registry.knatofs.se/yaml-converter:${sha}`,
               imagePullPolicy: "Always",
               ports: [
                 {
