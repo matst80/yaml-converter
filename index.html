@@ -40,25 +40,16 @@
       font-size: 4rem;
     }
 
-    /* input[type="file"] {
-        position: absolute;
-        appearance: none;
-        top: 0px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-      } */
     input[type="file"] {
-      width: 350px;
-      max-width: 100%;
-      padding: 5px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: absolute;
+      top: -100px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
     }
 
-    form {
+    .box {
       background-color: #31383a33;
       border-radius: 1rem;
       width: 400px;
@@ -69,7 +60,6 @@
       align-items: center;
       gap: 2rem;
       padding: 4rem;
-      position: relative;
       border: 3px dashed var(--color-secondary);
       margin-top: 4rem;
       margin-bottom: 2rem;
@@ -131,26 +121,28 @@
 <body>
   <h1>Convert kubernetes yaml to json</h1>
   <p>Convert your yaml files to json and use it from pulumi or slask-action</p>
-  <form method="post" action="convert" enctype="multipart/form-data" novalidate class="box">
-    <label for="file">
-      <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M20.5 29.0416C20.5 29.8701 21.1716 30.5416 22 30.5416C22.8284 30.5416 23.5 29.8701 23.5 29.0416H20.5ZM23.0607 3.93934C22.4749 3.35356 21.5251 3.35356 20.9393 3.93934L11.3934 13.4853C10.8076 14.0711 10.8076 15.0208 11.3934 15.6066C11.9792 16.1924 12.9289 16.1924 13.5147 15.6066L22 7.12132L30.4853 15.6066C31.0711 16.1924 32.0208 16.1924 32.6066 15.6066C33.1924 15.0208 33.1924 14.0711 32.6066 13.4853L23.0607 3.93934ZM23.5 29.0416V5H20.5V29.0416H23.5Z"
-          fill="#E0E0E0" />
-        <path d="M5.5 29V37C5.5 37.5523 5.94772 38 6.5 38H38.5C39.0523 38 39.5 37.5523 39.5 37V29" stroke="#E0E0E0"
-          stroke-width="3" stroke-linecap="round" />
-      </svg>
-      <strong>Choose files</strong>
-      <span> or drag it here</span>
-      <input type="file" name="files" id="file" multiple hidden />
-    </label>
+  <form method="post" action="convert" enctype="multipart/form-data" novalidate>
+    <div class="box">
+      <label for="file">
+        <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M20.5 29.0416C20.5 29.8701 21.1716 30.5416 22 30.5416C22.8284 30.5416 23.5 29.8701 23.5 29.0416H20.5ZM23.0607 3.93934C22.4749 3.35356 21.5251 3.35356 20.9393 3.93934L11.3934 13.4853C10.8076 14.0711 10.8076 15.0208 11.3934 15.6066C11.9792 16.1924 12.9289 16.1924 13.5147 15.6066L22 7.12132L30.4853 15.6066C31.0711 16.1924 32.0208 16.1924 32.6066 15.6066C33.1924 15.0208 33.1924 14.0711 32.6066 13.4853L23.0607 3.93934ZM23.5 29.0416V5H20.5V29.0416H23.5Z"
+            fill="#E0E0E0" />
+          <path d="M5.5 29V37C5.5 37.5523 5.94772 38 6.5 38H38.5C39.0523 38 39.5 37.5523 39.5 37V29" stroke="#E0E0E0"
+            stroke-width="3" stroke-linecap="round" />
+        </svg>
+        <strong>Choose files</strong>
+        <span> or drag it here</span>
+        <input type="file" name="files" id="file" multiple />
+      </label>
+    </div>
 
+    <div class="button-row">
+      <button type="submit" name="type" value="pure">Pure JSON</button>
+      <button type="submit" name="type" value="pulumi">Pulumi</button>
+      <button type="submit" name="type" value="slask">Slask</button>
+    </div>
   </form>
-  <div class="button-row">
-    <button type="submit" name="type" value="pure">Pure JSON</button>
-    <button type="submit" name="type" value="pulumi">Pulumi</button>
-    <button type="submit" name="type" value="slask">Slask</button>
-  </div>
   <script></script>
 </body>
 
