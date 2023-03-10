@@ -1,71 +1,148 @@
 <!DOCTYPE html>
 <html lang="en" class="js">
+  <head>
+    <meta charset="utf-8" />
+    <title>Convert kubernetes yaml to json</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-primary: #38ef7d;
+        --color-secondary: #11998e;
+      }
+      body {
+        font-family: "Fira Code", Roboto, sans-serif;
+        color: #cbdee4;
+        background-color: #1c2123;
+        padding: 5rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: "Golos Text", sans-serif;
+        font-size: 16px;
+      }
+      h1 {
+        background: -webkit-linear-gradient(
+          300deg,
+          var(--color-secondary) 20%,
+          var(--color-primary) 70%
+        );
+        text-align: center;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-box-decoration-break: clone;
+        font-size: 4rem;
+      }
+      /* input[type="file"] {
+        position: absolute;
+        appearance: none;
+        top: 0px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+      } */
+      input[type="file"] {
+        width: 350px;
+        max-width: 100%;
+        padding: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
 
-<head>
-	<meta charset="utf-8">
-	<title>Convert kubernetes yaml to json</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<style>
-		body {
-			font-family: "Fira Code", Roboto, sans-serif;
-			color: #cbdee4;
-			background-color: #1c2123;
-			padding: 5rem 1.25rem;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
+      form {
+        background-color: #31383a;
+        border-radius: 0.25rem;
+        width: 400px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 4rem;
+        position: relative;
+        border: 1px dashed var(--color-secondary);
+        margin-bottom: 2rem;
+      }
 
-		input[type="file"] {
-			position: absolute;
+      form img {
+        display: block;
+      }
 
-			top: -100px;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			z-index: 1;
-		}
+      label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
-		form {
-			background-color: #31383a;
-			border-radius: 2rem;
-			width: 400px;
-			height: 200px;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			gap: 2rem;
-			padding: 4rem;
-		}
+      form button {
+        position: absolute;
+        bottom: 1rem;
+        z-index: 2;
+      }
 
-		button {
-			background-color: #1c2123;
-			color: #cbdee4;
-			border: 1px solid #cbdee4;
-			border-radius: 0.25rem;
-			padding: 0.5rem 1rem;
-			font-size: 1rem;
-			cursor: pointer;
-			position: relative;
-			z-index: 2;
-		}
-	</style>
-</head>
+      button {
+        background-color: #1c2123;
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+        border-radius: 0.5rem;
+        padding: 0 1rem;
+        height: 3rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #2b3235;
+      }
+      button.fill {
+        background-color: var(--color-primary);
+        color: #000;
+      }
+      .button-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .button-row button {
+        margin: 0 1rem;
+      }
+    </style>
+  </head>
 
-<body>
-	<form method="post" action="convert" enctype="multipart/form-data" novalidate class="box">
-		<label for="file">
-			<input type="file" name="files" id="file" multiple />
-			<strong>Choose files</strong>
-			<span> or drag it here</span>
-		</label>
-		<button type="submit">Upload</button>
-	</form>
-	<script>
-
-	</script>
-
-</body>
-
+  <body>
+    <h1>Convert kubernetes yaml to json</h1>
+    <form
+      method="post"
+      action="convert"
+      enctype="multipart/form-data"
+      novalidate
+      class="box"
+    >
+      <label for="file">
+        <img src="assets/upload-icon.svg" alt="Upload files" />
+        <strong>Choose files</strong>
+        <span> or drag it here</span>
+        <input type="file" name="files" id="file" multiple hidden />
+      </label>
+      <button class="fill" type="submit">Upload</button>
+    </form>
+    <div class="button-row">
+      <button>Pure JSON</button>
+      <button>Pulumi</button>
+      <button>Slask</button>
+    </div>
+    <script></script>
+  </body>
 </html>
