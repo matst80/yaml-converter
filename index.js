@@ -26,7 +26,7 @@ const toPulumi = ({ kind, apiVersion, metadata, ...data }) => {
 
 const toSlask = ({ kind, apiVersion, metadata, ...data }) => {
   const { name, namespace, ...meta } = metadata;
-  return `create${kind}(namespace,${JSON.stringify(
+  return `k8s.create${kind}(namespace,${JSON.stringify(
     {
       metadata: { name, ...meta },
       ...data,
@@ -35,6 +35,13 @@ const toSlask = ({ kind, apiVersion, metadata, ...data }) => {
     2
   )})`;
 };
+
+const slaskHead = `
+/** @type {import('ts-kubernetes-action').DeploymentConfig} */
+module.exports = async (k8s, { sha }) => {
+	const namespace = 'default'
+`;
+const slaskFoot = `}`;
 
 http
   .createServer(function (req, res) {
@@ -47,7 +54,7 @@ http
           if (format === "pulumi") {
             return files.map(toPulumi).join("\n");
           } else if (format === "slask") {
-            return files.map(toSlask).join("\n");
+            return slaskHead + files.map(toSlask).join("\n") + slaskFoot;
           }
           return JSON.stringify(files, null, 2);
         })
