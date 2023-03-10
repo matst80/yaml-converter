@@ -9,7 +9,7 @@ on:
 jobs:
 
   build:
-
+    name: Build, publish then deploy
     runs-on: self-hosted
 
     steps:
