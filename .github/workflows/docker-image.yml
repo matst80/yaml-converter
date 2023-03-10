@@ -10,7 +10,7 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v3
@@ -31,4 +31,4 @@ jobs:
         uses: matst80/slask-action@test
         with:
           k8sConfig: ${{ secrets.K8S_CONFIG }}
-          scriptFile: 'deploy.js'
+          scriptPath: 'deploy.js'
