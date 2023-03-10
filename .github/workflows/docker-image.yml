@@ -26,7 +26,7 @@ jobs:
         with:
           context: "{{defaultContext}}"
           push: true
-          tags: registry.knatofs.se/yaml-converter:${{ steps.commit.outputs.short }}
+          tags: registry.knatofs.se/yaml-converter
       - name: Deploy scripted application
         uses: matst80/slask-action@v1
         with:
