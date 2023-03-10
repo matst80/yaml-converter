@@ -40,6 +40,7 @@ const getFileChunks = (req, boundary) =>
         const fields = Object.fromEntries(
           parts.filter(isField).map(extractKeyValue)
         );
+        console.log(files, fields);
         res({ files, fields });
       });
   });

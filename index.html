@@ -111,6 +111,14 @@
       margin: 0 1rem;
     }
 
+    p {
+      text-align: center;
+    }
+
+    a {
+      color: var(--color-primary);
+    }
+
     .button-row button:hover {
       background-color: var(--color-primary);
       color: #000;
@@ -120,7 +128,11 @@
 
 <body>
   <h1>Convert kubernetes yaml to json</h1>
-  <p>Convert your yaml files to json and use it from pulumi or slask-action</p>
+  <p>Convert your yaml files to json and use it from pulumi or slask-action<br />slask-action is a github action to
+    make fast, scripted and typed kubernetes deployments<br /> <a
+      href="https://github.com/marketplace/actions/scripted-kubernetes-deployment">Scripted kubernetes deployment
+      action</a>
+  </p>
   <form method="post" action="convert" enctype="multipart/form-data" novalidate>
     <div class="box">
       <label for="file">
@@ -138,9 +150,9 @@
     </div>
 
     <div class="button-row">
-      <button type="submit" name="format" value="pure">Pure JSON</button>
+      <button type="submit" name="format" value="pure">JSON</button>
       <button type="submit" name="format" value="pulumi">Pulumi</button>
-      <button type="submit" name="format" value="slask">Slask</button>
+      <button type="submit" name="format" value="slask">Slask action</button>
     </div>
   </form>
   <script></script>
