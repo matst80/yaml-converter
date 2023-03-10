@@ -45,7 +45,7 @@ const getFileChunks = (req, boundary) =>
   });
 
 const toJson = (chunk) => {
-  const { kind, apiVersion, metadata, ...data } = parse(chunk);
+  const { kind, apiVersion, metadata = {}, ...data } = parse(chunk);
   const { name, namespace, ...meta } = metadata;
   return {
     kind,
