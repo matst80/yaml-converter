@@ -41,7 +41,7 @@ function asDeployments(key, value) {
 http.createServer(function (req, res) {
 	if (req.method === 'POST') {
 		return getFileChunks(req, getBoundary(req.headers['content-type'])).then(splitYaml).then(convertToJSON).then((json) => {
-			res.writeHead(200, { 'Content-Type': 'application/json' })
+			res.writeHead(200, { 'Content-Type': 'application/json', 'Content-Disposition': 'attachment; filename=result.json' })
 			res.end(JSON.stringify(json, asDeployments, 2))
 		})
 	} else {
