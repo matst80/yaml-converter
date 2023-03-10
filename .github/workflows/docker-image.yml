@@ -28,7 +28,7 @@ jobs:
           push: true
           tags: registry.knatofs.se/yaml-converter:latest
       - name: Deploy scripted application
-        uses: matst80/slask-action@test
+        uses: matst80/slask-action@v1
         with:
           k8sConfig: ${{ secrets.K8S_CONFIG }}
-          scriptPath: '${GITHUB_WORKSPACE}/deploy.js'
+          scriptPath: deploy.js
