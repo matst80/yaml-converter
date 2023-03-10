@@ -1,7 +1,7 @@
 FROM node:18-alpine
 WORKDIR /app
-COPY package.json .
+COPY packag*.json ./
 RUN npm ci
-COPY . .
+COPY index.* ./
 EXPOSE 8080
 RUN node index.js

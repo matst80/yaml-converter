@@ -20,17 +20,29 @@ const getFileChunks = (req, boundary) => new Promise((res) => {
 
 const splitYaml = (chunks) => chunks.map(chunk => chunk.split('---')).flat()
 
-const convertToJSON = (chunks) => chunks.map((chunk) => {
-	return parse(chunk)
+const convertToJSON = (chunks) => chunks.filter(chunk => chunk != null).map((chunk) => {
+	const { kind, apiVersion, metadata, ...data } = parse(chunk)
+	const { name, namespace, ...meta } = metadata
+	return {
+		kind,
+		apiVersion,
+		metadata: { name, ...meta },
+		...data
+	}
 })
 
 const index = readFileSync('index.html', 'utf8')
+
+function asDeployments(key, value) {
+	console.log(key, value)
+	return value
+}
 
 http.createServer(function (req, res) {
 	if (req.method === 'POST') {
 		return getFileChunks(req, getBoundary(req.headers['content-type'])).then(splitYaml).then(convertToJSON).then((json) => {
 			res.writeHead(200, { 'Content-Type': 'application/json' })
-			res.end(JSON.stringify(json, null, 2))
+			res.end(JSON.stringify(json, asDeployments, 2))
 		})
 	} else {
 		return res.writeHead(200, { 'Content-Type': 'text/html' }).end(index)
