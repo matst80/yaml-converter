@@ -30,6 +30,8 @@ jobs:
   publish:
     name: Apply changes in kubernetes
     runs-on: ubuntu-latest
+    needs:
+      - build
     steps:
       - uses: actions/checkout@v3
       - name: Deploy scripted application
