@@ -26,6 +26,17 @@
       font-family: "Golos Text", sans-serif;
       font-size: 16px;
     }
+    
+    code {
+      padding: 1rem;
+      background: #000;
+      border: 1px solid #333;
+      border-radius: 5px;
+    }
+    pre {
+      padding:0;
+      margin:0;
+    }
 
     h1 {
       background: -webkit-linear-gradient(300deg,
@@ -133,6 +144,10 @@
       href="https://github.com/marketplace/actions/scripted-kubernetes-deployment">Scripted kubernetes deployment
       action</a>
   </p>
+  <p>you can also use curl to convert files in cli</p>
+  <code>
+    <pre>curl -F format=slask -F files=@deploy.yaml https://yaml-converter.knatofs.se/</pre>
+  </code>
   <form method="post" action="convert" enctype="multipart/form-data" novalidate>
     <div class="box">
       <label for="file">
