@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy scripted application
-        uses: matst80/slask-action@v1
+        uses: matst80/slask-action@main
         with:
           k8sConfig: ${{ secrets.K8S_CONFIG }}
           scriptPath: deploy.js
