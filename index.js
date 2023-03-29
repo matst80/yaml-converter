@@ -60,6 +60,7 @@ http
         })
         .then(asDownload(res));
     } else {
+      console.log(["GET", req.url, Math.random() * 800].join(";"));
       res.setHeader("Cache-Control", "public; max-age=604800");
       return res.writeHead(200, { "Content-Type": "text/html" }).end(index);
     }

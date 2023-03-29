@@ -3,34 +3,6 @@ module.exports = async (k8s, { sha }) => {
   const namespace = "default"
   const labels = { app: "yaml-converter" }
 
-  await k8s.createConfigMap(namespace, {
-    metadata: {
-      name: "promtail-config",
-    },
-    data: {
-      "promtail.yaml": `
-server:
-  http_listen_port: 9080
-  grpc_listen_port: 0
-
-positions:
-  filename: /tmp/positions.yaml
-
-clients:
-  - url: http://loki.loki-stack.svc:3100/loki/api/v1/push
-
-scrape_configs:
-- job_name: push1
-  loki_push_api:
-    server:
-      http_listen_port: 3500
-      grpc_listen_port: 3600
-    labels:
-      pushserver: push1
-`
-    }
-  })
-
   await k8s.createDeployment(namespace, {
     metadata: {
       name: "yaml-converter",
@@ -60,27 +32,6 @@ scrape_configs:
             },
           ],
           containers: [
-            {
-              name: "promtail",
-              image: "grafana/promtail:2.2.1",
-              imagePullPolicy: "Always",
-              args: [
-                "-config.file=/etc/promtail/promtail.yaml",
-                "-client.external-labels=app=yaml-converter",
-              ],
-              ports: [
-                {
-                  containerPort: 9080,
-                },
-              ],
-              volumeMounts: [
-                {
-                  name: "config",
-                  mountPath: "/etc/promtail",
-                  subPath: "promtail.yaml",
-                },
-              ],
-            },
             {
               name: "converter",
               image: `registry.knatofs.se/yaml-converter:${sha}`,
