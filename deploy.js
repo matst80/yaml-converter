@@ -1,7 +1,7 @@
 /** @type {import('ts-kubernetes-action').DeploymentConfig} */
 module.exports = async (k8s, { sha }) => {
-  const namespace = "default"
-  const labels = { app: "yaml-converter" }
+  const namespace = "default";
+  const labels = { app: "yaml-converter" };
 
   await k8s.createDeployment(namespace, {
     metadata: {
@@ -34,7 +34,10 @@ module.exports = async (k8s, { sha }) => {
           containers: [
             {
               name: "converter",
-              image: `registry.knatofs.se/yaml-converter:${sha}`,
+              image: `registry.knatofs.se/yaml-converter:${sha.substring(
+                0,
+                7
+              )}`,
               imagePullPolicy: "Always",
               ports: [
                 {
@@ -51,7 +54,7 @@ module.exports = async (k8s, { sha }) => {
         },
       },
     },
-  })
+  });
   await k8s.createService(namespace, {
     metadata: {
       name: "yaml-converter",
@@ -64,7 +67,7 @@ module.exports = async (k8s, { sha }) => {
         },
       ],
     },
-  })
+  });
   await k8s.createIngress(namespace, {
     metadata: {
       name: "yaml-converter",
@@ -93,5 +96,5 @@ module.exports = async (k8s, { sha }) => {
         },
       ],
     },
-  })
-}
+  });
+};
