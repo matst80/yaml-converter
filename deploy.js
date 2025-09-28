@@ -1,6 +1,6 @@
 /** @type {import('ts-kubernetes-action').DeploymentConfig} */
 module.exports = async (k8s, { sha }) => {
-  const namespace = "default";
+  const namespace = "dev";
   const labels = { app: "yaml-converter" };
 
   await k8s.createDeployment(namespace, {
@@ -71,6 +71,9 @@ module.exports = async (k8s, { sha }) => {
   await k8s.createIngress(namespace, {
     metadata: {
       name: "yaml-converter",
+      annotations: {
+        "cert-manager.io/cluster-issuer": "letsencrypt-prod",
+      },
     },
     spec: {
       ingressClassName: "nginx",
